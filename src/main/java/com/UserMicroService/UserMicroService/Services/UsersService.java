@@ -6,6 +6,8 @@ import com.UserMicroService.UserMicroService.Models.Users;
 import com.UserMicroService.UserMicroService.Repository.UsersRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsersService {
     private final UsersRepository usersRepository;
@@ -15,7 +17,6 @@ public class UsersService {
     }
 
     public Users createUser(UserRequest userRequest) {
-        System.out.println("Raw Request Body: " + userRequest.getEmail());
         if (usersRepository.existsByEmail(userRequest.getEmail())) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
@@ -29,7 +30,10 @@ public class UsersService {
         newUser.setPhone(userRequest.getPhone());
         newUser.setCity(userRequest.getCity());
         return usersRepository.save(newUser);
+    }
 
+    public List<Users> getAllUsers() {
+        return usersRepository.findAll();
     }
 
 }
