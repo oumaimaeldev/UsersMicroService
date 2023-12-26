@@ -9,18 +9,21 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @ControllerAdvice
 public class CustomExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<String>> handleValidationException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException ex) {
         BindingResult result = ex.getBindingResult();
-        List<String> errors = new ArrayList<>();
+        Map<String, String> errors = new HashMap<>();
 
-        // Iterate through field errors and add them to the errors list
         for (FieldError fieldError : result.getFieldErrors()) {
-            errors.add(fieldError.getDefaultMessage());
+            String fieldName = fieldError.getField();
+            String errorMessage = fieldError.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
         }
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);

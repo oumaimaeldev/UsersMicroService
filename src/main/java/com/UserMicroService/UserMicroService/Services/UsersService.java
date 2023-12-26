@@ -14,6 +14,9 @@ public class UsersService {
     }
 
     public Users createUser(UserRequest userRequest) {
+        if (usersRepository.existsByEmail(userRequest.getEmail())) {
+            throw new RuntimeException("Email already exists");
+        }
         System.out.println("Raw Request Body: " + userRequest);
         Users newUser = new Users();
         newUser.setFirstname(userRequest.getFirstname());
@@ -24,8 +27,8 @@ public class UsersService {
         newUser.setPassword(userRequest.getPassword());
         newUser.setPhone(userRequest.getPhone());
         newUser.setCity(userRequest.getCity());
-
         return usersRepository.save(newUser);
+
     }
 
 }
