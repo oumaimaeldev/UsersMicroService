@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.PublicKey;
 import java.util.List;
 
 @RestController
@@ -26,6 +25,16 @@ public class UsersController {
     @GetMapping("/all")
     public List<Users> getAllUsers() {
         return usersService.getAllUsers();
+    }
+
+    @GetMapping("/{id}")
+    public Users getUserById(@PathVariable Long id) {
+        return usersService.getUserById(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public Users updateUser(@PathVariable Long id, @RequestBody UserRequest updatedUser){
+        return usersService.updateUser(id, updatedUser);
     }
 
 }

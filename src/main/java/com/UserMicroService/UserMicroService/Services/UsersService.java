@@ -2,11 +2,13 @@ package com.UserMicroService.UserMicroService.Services;
 
 import com.UserMicroService.UserMicroService.DAO.UserRequest;
 import com.UserMicroService.UserMicroService.Exception.EmailAlreadyExistsException;
+import com.UserMicroService.UserMicroService.Exception.UserNotFoundException;
 import com.UserMicroService.UserMicroService.Models.Users;
 import com.UserMicroService.UserMicroService.Repository.UsersRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsersService {
@@ -36,4 +38,21 @@ public class UsersService {
         return usersRepository.findAll();
     }
 
+    public Users getUserById(Long id) {
+        Optional<Users> userOptional = usersRepository.findById(id);
+        return userOptional.orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+    }
+
+    public Users updateUser(Long id, UserRequest updatedUser) {
+        Users existingUser = getUserById(id);
+        existingUser.setFirstname(updatedUser.getFirstname());
+        existingUser.setLastname(updatedUser.getLastname());
+        existingUser.setAddress(updatedUser.getAddress());
+        existingUser.setRole(updatedUser.getRole());
+        existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setPassword(updatedUser.getPassword());
+        existingUser.setPhone(updatedUser.getPhone());
+        existingUser.setCity(updatedUser.getCity());
+        return usersRepository.save(existingUser);
+    }
 }
