@@ -1,6 +1,7 @@
 package com.UserMicroService.UserMicroService.Services;
 
 import com.UserMicroService.UserMicroService.DAO.UserRequest;
+import com.UserMicroService.UserMicroService.Exception.EmailAlreadyExistsException;
 import com.UserMicroService.UserMicroService.Models.Users;
 import com.UserMicroService.UserMicroService.Repository.UsersRepository;
 import org.springframework.stereotype.Service;
@@ -14,13 +15,10 @@ public class UsersService {
     }
 
     public Users createUser(UserRequest userRequest) {
-        /*
+        System.out.println("Raw Request Body: " + userRequest.getEmail());
         if (usersRepository.existsByEmail(userRequest.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new EmailAlreadyExistsException("Email already exists");
         }
-
-         */
-        System.out.println("Raw Request Body: " + userRequest);
         Users newUser = new Users();
         newUser.setFirstname(userRequest.getFirstname());
         newUser.setLastname(userRequest.getLastname());
