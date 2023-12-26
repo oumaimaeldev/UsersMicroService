@@ -3,14 +3,18 @@ package com.UserMicroService.UserMicroService.Services;
 import com.UserMicroService.UserMicroService.DAO.UserRequest;
 import com.UserMicroService.UserMicroService.Models.Users;
 import com.UserMicroService.UserMicroService.Repository.UsersRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class UsersService {
     private final UsersRepository usersRepository;
+
+    public UsersService(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
+
     public Users createUser(UserRequest userRequest) {
+        System.out.println("Raw Request Body: " + userRequest);
         Users newUser = new Users();
         newUser.setFirstname(userRequest.getFirstname());
         newUser.setLastname(userRequest.getLastname());
