@@ -1,11 +1,7 @@
 package com.UserMicroService.UserMicroService.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "_users")
 public class Users {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
     @NotBlank(message="First name cannot be empty")
     private String Firstname;
