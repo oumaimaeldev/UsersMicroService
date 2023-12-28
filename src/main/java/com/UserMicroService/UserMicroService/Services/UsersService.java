@@ -55,4 +55,9 @@ public class UsersService {
         existingUser.setCity(updatedUser.getCity());
         return usersRepository.save(existingUser);
     }
+
+    public void deleteById(Long id){
+        //return usersRepository.deleteById(id);
+
+    }
 }

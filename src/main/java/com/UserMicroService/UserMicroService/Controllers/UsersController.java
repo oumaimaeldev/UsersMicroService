@@ -37,4 +37,9 @@ public class UsersController {
         return usersService.updateUser(id, updatedUser);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable Long id){
+        //return usersService.deleteById(id);
+    }
+
 }
