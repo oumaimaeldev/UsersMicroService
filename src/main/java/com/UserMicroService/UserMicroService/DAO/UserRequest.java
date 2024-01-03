@@ -13,6 +13,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequest {
+    @NotBlank(message="CIN cannot be empty")
+    @Pattern(regexp = "^(\\d{2}\\s?\\d{2}\\s?\\d{2}\\s?\\d{4})$\n", message = "CIN non valid")
+    private String CIN;
     @NotBlank(message="First name cannot be empty")
     @Pattern(regexp = "^[a-zA-Z]+$", message = "First name should contain only letters")
     private String Firstname;
