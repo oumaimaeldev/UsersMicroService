@@ -17,6 +17,7 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @Column(unique = true)
     private String CIN;
     private String Firstname;
     private String Lastname;
