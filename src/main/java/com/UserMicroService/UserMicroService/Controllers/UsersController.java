@@ -33,13 +33,13 @@ public class UsersController {
     }
 
     @PutMapping("/update/{id}")
-    public Users updateUser(@PathVariable Long id, @RequestBody UserRequest updatedUser){
+    public Users updateUser(@PathVariable Long id, @RequestBody @Valid UserRequest updatedUser){
         return usersService.updateUser(id, updatedUser);
     }
 
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Long id){
-        //return usersService.deleteById(id);
+        usersService.deleteById(id);
     }
 
 }

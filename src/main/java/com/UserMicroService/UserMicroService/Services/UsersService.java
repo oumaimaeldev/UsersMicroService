@@ -23,6 +23,7 @@ public class UsersService {
             throw new EmailAlreadyExistsException("Email already exists");
         }
         Users newUser = new Users();
+        newUser.setCIN(userRequest.getCIN());
         newUser.setFirstname(userRequest.getFirstname());
         newUser.setLastname(userRequest.getLastname());
         newUser.setAddress(userRequest.getAddress());
@@ -45,6 +46,7 @@ public class UsersService {
 
     public Users updateUser(Long id, UserRequest updatedUser) {
         Users existingUser = getUserById(id);
+        existingUser.setCIN(updatedUser.getCIN());
         existingUser.setFirstname(updatedUser.getFirstname());
         existingUser.setLastname(updatedUser.getLastname());
         existingUser.setAddress(updatedUser.getAddress());
@@ -56,8 +58,8 @@ public class UsersService {
         return usersRepository.save(existingUser);
     }
 
-    public void deleteById(Long id){
-        //return usersRepository.deleteById(id);
-
+    public void deleteById(Long id) {
+        usersRepository.deleteById(id);
     }
+
 }

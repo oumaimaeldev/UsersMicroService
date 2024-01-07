@@ -16,7 +16,7 @@ import lombok.*;
 public class UserRequest {
     @Column(unique = true)
     @NotBlank(message="CIN cannot be empty")
-    @Pattern(regexp = "^(\\d{2}\\s?\\d{2}\\s?\\d{2}\\s?\\d{4})$\n", message = "CIN non valid")
+    @Pattern(regexp = "^[a-zA-Z]{2}\\d{5}$", message = "CIN non valid")
     private String CIN;
     @NotBlank(message="First name cannot be empty")
     @Pattern(regexp = "^[a-zA-Z]+$", message = "First name should contain only letters")
@@ -29,7 +29,7 @@ public class UserRequest {
     @NotBlank(message="please select role")
     private String Role;
     @NotBlank(message="Email cannot be empty")
-    @Email
+    @jakarta.validation.constraints.Email
     private String Email;
     @NotBlank(message="Password cannot be empty")
     private String Password;
@@ -37,5 +37,7 @@ public class UserRequest {
     private String Phone;
     @NotBlank(message="please select City")
     private String City;
+
+
 
 }
